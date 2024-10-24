@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <title>Trainer Dashboard</title>
+    <style>
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .profile-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .profile-header h2 {
+            margin: 0;
+            font-size: 28px;
+            color: #333;
+        }
+
+        .profile-header small {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .profile-header img {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border: 3px solid #007bff;
+        }
+
+        .profile-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .profile-nav a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .profile-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .profile-info,
+        .profile-contact-info,
+        .services,
+        .experience {
+            margin-top: 25px;
+        }
+
+        h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #007bff;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .rating span {
+            margin-right: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .rating i {
+            color: #f5b50a;
+        }
+
+        .services ul,
+        .experience ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .services li,
+        .experience li {
+            margin: 10px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .services li::before,
+        .experience li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        /* Add styling for the Edit Profile button */
+        .edit-profile-btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .edit-profile-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* General button style */
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .profile-settings {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .profile-settings .btn {
+            margin-right: 15px;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #162a40;
+            padding: 20px;
+            height: 30px;
+            z-index: 1000;
+
+        }
+
+        .left_side h3 {
+            color: #fff;
+            margin: 0;
+            text-transform: uppercase;
+            font-size: 22px;
+            font-weight: 900;
+        }
+
+        .side-nav {
+            background-image: linear-gradient(to bottom, #162a40, #1a364e, #cb808b);
+            padding-top: 30px;
+            position: fixed;
+            left: 0;
+            width: 270px;
+            height: calc(100vh - 70px);
+            top: 70px;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .side-nav .logo {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .side-nav .image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        .side-nav a {
+            color: #fff;
+            display: block;
+            line-height: 60px;
+            text-decoration: none;
+            padding-left: 40px;
+            box-sizing: border-box;
+            transition: 0.5s;
+        }
+
+        .side-nav a:hover {
+            /* background: #0a7e96; */
+            background: #cb808b;
+            color: black;
+        }
+
+        .side-nav i {
+            padding-right: 10px;
+        }
+
+        label #side-nav_btn {
+            z-index: 1;
+            color: #fff;
+            position: fixed;
+            cursor: pointer;
+            left: 300px;
+            font-size: 20px;
+            margin: 5px 0;
+            transition: color 0.3s;
+            transition-property: color;
+        }
+
+        label #side-nav_btn:hover {
+            color: #cb808b;
+        }
+
+        #check:checked~.side-nav {
+            left: -190px;
+        }
+
+        #check:checked~.side-nav a span {
+            display: none;
+        }
+
+        #check:checked~.side-nav a {
+            font-size: 20px;
+            margin-left: 170px;
+            width: 80px;
+        }
+
+
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            height: 100vh;
+            box-sizing: border-box;
+            overflow: hidden;
+            transition: 0.5s;
+        }
+
+
+        #check:checked~.content {
+            margin-left: 0;
+            /* Adjusts the margin to make content full-screen */
+        }
+
+        #check {
+            display: none;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
+        }
+
+        .left_side span a {
+            text-decoration: none;
+            text-align: right;
+
+        }
+
+        .left_side span a h2 {
+            margin-right: 100px;
+            color: white;
+            margin-top: 0;
+
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="check">
+    <header>
+        <label for="check">
+            <i class="fa fa-bars" id="side-nav_btn"></i>
+        </label>
+        
+        <div class="left_side">
+            <h3>ActiveJeevan</h3>
+            <span><a href="index.html">
+                    <h2>Home</h2>
+                </a></span>
+
+        </div>
+    </header>
+
+    <div class="side-nav">
+       
+
+        <a href="trainer dashboard.html" target="contentFrame"><i class="fa fa-user-circle"></i><span>Manage Clients</span></a>
+        <a href="bmi.html" target="contentFrame"><i class="fa fa-calculator"></i><span>Client Progress</span></a>
+        <a href="preferences.html" target="contentFrame"><i class="fa fa-bullseye"></i><span>Create Plan</span></a>
+       
+        <a href="profile1.html" target="contentFrame"><i class="fa fa-chalkboard-teacher"></i><span>Profile</span></a>
+        
+
+    </div>
+    <div class="content">
+        <iframe name="contentFrame" src="profile.ejs"></iframe>
+    </div>
+    <div class="profile-card">
+        <div class="profile-header">
+            <div>
+                <h2>John Doe</h2>
+                <small>Certified Fitness Trainer | New York, NY</small>
+            </div>
+            <img src="trainer-1.jpg" alt="John Doe's Profile Picture">
+        </div>
+
+        <div class="rating">
+            <span>9.5</span>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-alt"></i>
+        </div>
+
+        <!-- Navigation links for the trainer -->
+        <div class="profile-nav">
+            <div>
+                <a href="#">My Clients</a> |
+                <a href="#">Appointments</a> |
+                <a href="#">Schedule</a>
+            </div>
+            <div>
+                <a href="#">Timeline</a> |
+                <a href="#" class="active">Profile</a>
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <div class="services">
+            <h3>My Services</h3>
+            <ul>
+                <li>Personal Training (1-on-1)</li>
+                <li>Group Fitness Classes</li>
+                <li>Online Coaching</li>
+                <li>Nutrition Planning</li>
+                <li>Strength and Conditioning</li>
+                <li>Rehabilitation & Recovery</li>
+            </ul>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="experience">
+            <h3>My Experience</h3>
+            <ul>
+                <li>Certified Personal Trainer (CPT) with over 10 years of experience</li>
+                <li>Worked with 500+ clients to achieve their fitness goals</li>
+                <li>Specialized in weight loss, muscle gain, and strength training</li>
+                <li>Former trainer at "Fitness First" for 5 years</li>
+                <li>Fitness consultant for various corporate wellness programs</li>
+            </ul>
+        </div>
+
+        <!-- Contact Info Section -->
+        <div class="profile-contact-info">
+            <h3>Contact Information</h3>
+            <p>Phone: +1 987 654 3210</p>
+            <p>Address: 123 Fitness Avenue, New York, NY 10038</p>
+            <p>Email: contact@johndoefitness.com</p>
+            <p>Website: www.johndoefitness.com</p>
+        </div>
+
+        <!-- Basic Info Section -->
+        <div class="base-info">
+            <h3>Basic Information</h3>
+            <p>Birthday: March 15, 1988</p>
+            <p>Gender: Male</p>
+        </div>
+
+        <!-- Buttons to manage profile -->
+        <div class="profile-settings">
+            <a href="/edit-profile" class="btn edit-profile-btn">Edit Profile</a>
+            <a href="/appointments" class="btn edit-profile-btn">Manage Appointments</a>
+            <a href="/schedule" class="btn edit-profile-btn">View Schedule</a>
+        </div>
+    </div>
+</body>
+</html>

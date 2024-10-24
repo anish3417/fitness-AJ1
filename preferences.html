@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dietary Preferences</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            background-color: transparent;
+            border-radius: 10px;
+            padding: 80px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select {
+            padding: 10px;
+            border: 2px solid #cb808b;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        select:hover {
+            border-color: #cb808b;
+        }
+
+        .button {
+            background-color: #cb808b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-top: 50px;
+        }
+
+        .button:hover {
+            background-color: #cc6473;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .result h2 {
+            
+            color:white
+        }
+
+        .result ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .result li {
+            background-color: #cb808b;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .result li img {
+            width: 150px;
+            height: 150px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .result li:hover {
+            background-color: #cb808b;
+            color: white;
+        }
+
+        .meal-description {
+            text-align: left;
+            margin-top: 10px;
+        }
+        body{
+            background-image: url(https://cdn.pixabay.com/photo/2022/02/18/16/43/incense-7021038_960_720.jpg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>CHOOSE YOUR FITNESS GOAL AND DIETARY PREFERENCE</h1>
+    <div class="container">
+        <div class="form">
+            <label class="goal">Select your fitness goal</label>
+            <select id="goal">
+                <option value="">--Select--</option>
+                <option value="weightLoss">Weight Loss</option>
+                <option value="gainWeight">Weight Gain</option>
+                <option value="buildMuscle">Build Muscle</option>
+            </select>
+        </div>
+
+        <div class="form">
+            <label class="diet">Select your dietary preference</label>
+            <select id="diet">
+                <option value="">--Select--</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="nonVegetarian">Non-Vegetarian</option>
+                <option value="vegan">Vegan</option>
+            </select>
+            <br>
+            <button id="button" class="button">Get Meal Recommendations</button>
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const recommendations = {
+            weightLoss: {
+                vegetarian: [
+                    { 
+                        meal: "Salad with Quinoa", 
+                        img: "https://cdn.pixabay.com/photo/2016/11/17/22/57/pan-1832926_640.jpg", 
+                        description: "A light, refreshing salad rich in fiber and plant-based protein.", 
+                        calories: "350 kcal", 
+                        macronutrients: "Carbs: 40g, Protein: 10g, Fat: 12g", 
+                        benefits: "Helps you stay full longer with fewer calories, promotes digestive health."
+                    },
+                    { 
+                        meal: "Vegetable Stir-fry", 
+                        img: "https://cdn.pixabay.com/photo/2022/05/20/08/55/pasta-7209002_640.jpg", 
+                        description: "A quick and nutritious stir-fry loaded with colorful vegetables.", 
+                        calories: "300 kcal", 
+                        macronutrients: "Carbs: 35g, Protein: 8g, Fat: 10g", 
+                        benefits: "Packed with vitamins and antioxidants, low in fat."
+                    },
+                    { 
+                        meal: "Chickpea Salad", 
+                        img: "https://cdn.pixabay.com/photo/2019/07/07/08/25/fried-rice-4321984_640.jpg", 
+                        description: "A protein-packed salad with chickpeas, fresh veggies, and herbs.", 
+                        calories: "400 kcal", 
+                        macronutrients: "Carbs: 45g, Protein: 15g, Fat: 14g", 
+                        benefits: "Great for weight loss due to its high fiber and protein content."
+                    }
+                ],
+                nonVegetarian: [
+                    {
+                        meal: "Grilled Chicken Salad",
+                        img: "https://cdn.pixabay.com/photo/2024/02/15/09/30/grilled-chicken-8575040_640.png",
+                        description: "Lean grilled chicken breast served on a bed of fresh greens.",
+                        calories: "350 kcal",
+                        macronutrients: "Carbs: 20g, Protein: 35g, Fat: 10g",
+                        benefits: "Low in calories, high in protein, perfect for muscle retention while losing weight."
+                    },
+                    {
+                        meal: "Fish Tacos",
+                        img: "https://cdn.pixabay.com/photo/2019/12/20/21/17/taco-4709325_640.jpg",
+                        description: "Tacos filled with grilled fish, fresh salsa, and avocado.",
+                        calories: "400 kcal",
+                        macronutrients: "Carbs: 35g, Protein: 25g, Fat: 15g",
+                        benefits: "Rich in omega-3s and high in protein for a healthy weight loss."
+                    },
+                    {
+                        meal: "Shrimp Stir-fry",
+                        img: "https://cdn.pixabay.com/photo/2019/12/01/15/08/shrimp-tempura-4665687_640.jpg",
+                        description: "Shrimp stir-fried with colorful vegetables and a light soy sauce.",
+                        calories: "320 kcal",
+                        macronutrients: "Carbs: 30g, Protein: 30g, Fat: 8g",
+                        benefits: "Low in fat and calories, high in protein and healthy fats."
+                    }
+                ],
+                vegan: [
+                    {
+                        meal: "Lentil Soup",
+                        img: "https://cdn.pixabay.com/photo/2018/10/10/22/28/lentil-soup-3738547_1280.jpg",
+                        description: "Hearty lentil soup loaded with vegetables and spices.",
+                        calories: "250 kcal",
+                        macronutrients: "Carbs: 35g, Protein: 15g, Fat: 5g",
+                        benefits: "Low in calories and high in fiber, great for weight loss."
+                    },
+                    {
+                        meal: "Grilled Vegetable Wrap",
+                        img: "https://cdn.pixabay.com/photo/2015/09/18/17/47/vegan-946034_640.jpg",
+                        description: "A wrap filled with grilled veggies and hummus.",
+                        calories: "300 kcal",
+                        macronutrients: "Carbs: 40g, Protein: 10g, Fat: 10g",
+                        benefits: "Fiber-rich and nutrient-dense, great for a low-calorie diet."
+                    },
+                    {
+                        meal: "Tofu Stir-fry",
+                        img: "https://cdn.pixabay.com/photo/2011/05/25/14/49/fry-up-7627_640.jpg",
+                        description: "Tofu stir-fried with vegetables and served over brown rice.",
+                        calories: "350 kcal",
+                        macronutrients: "Carbs: 50g, Protein: 15g, Fat: 10g",
+                        benefits: "High in protein and fiber, promotes weight loss."
+                    }
+                ]
+            },
+            gainWeight: {
+                vegetarian: [
+                    { 
+                        meal: "Peanut Butter Banana Smoothie", 
+                        img: "https://cdn.pixabay.com/photo/2015/02/19/13/59/breakfast-drink-642121_1280.jpg", 
+                        description: "A creamy, protein-packed smoothie to boost calorie intake.", 
+                        calories: "600 kcal", 
+                        macronutrients: "Carbs: 75g, Protein: 20g, Fat: 30g", 
+                        benefits: "Provides healthy fats and quick energy, perfect for post-workout." 
+                    },
+                    { 
+                        meal: "Avocado Toast with Eggs", 
+                        img: "https://cdn.pixabay.com/photo/2017/08/23/18/02/food-2673724_640.jpg", 
+                        description: "Whole grain toast topped with smashed avocado and eggs.", 
+                        calories: "500 kcal", 
+                        macronutrients: "Carbs: 40g, Protein: 20g, Fat: 30g", 
+                        benefits: "Rich in healthy fats and protein, supports muscle growth." 
+                    },
+                    { 
+                        meal: "Chickpea and Quinoa Bowl", 
+                        img: "https://cdn.pixabay.com/photo/2020/07/12/09/15/quinoa-5396618_640.jpg", 
+                        description: "A hearty bowl filled with chickpeas, quinoa, and roasted veggies.", 
+                        calories: "700 kcal", 
+                        macronutrients: "Carbs: 80g, Protein: 25g, Fat: 20g", 
+                        benefits: "High in protein and fiber, aids in healthy weight gain." 
+                    }
+                ],
+                nonVegetarian: [
+                    {
+                        meal: "Chicken Alfredo Pasta",
+                        img: "https://cdn.pixabay.com/photo/2023/10/10/08/40/alfredo-8305773_640.jpg",
+                        description: "Creamy pasta with grilled chicken for a calorie boost.",
+                        calories: "800 kcal",
+                        macronutrients: "Carbs: 90g, Protein: 40g, Fat: 30g",
+                        benefits: "High in calories and protein, ideal for muscle gain."
+                    },
+                    {
+                        meal: "Beef Stir-fry",
+                        img: "https://cdn.pixabay.com/photo/2018/08/29/19/03/steak-3640560_640.jpg",
+                        description: "Stir-fried beef with vegetables served over rice.",
+                        calories: "700 kcal",
+                        macronutrients: "Carbs: 60g, Protein: 50g, Fat: 20g",
+                        benefits: "Packed with protein and calories, great for muscle building."
+                    },
+                    {
+                        meal: "Fish and Chips",
+                        img: "https://cdn.pixabay.com/photo/2024/03/20/12/26/fish-and-chips-8645438_1280.jpg",
+                        description: "Crispy fish served with fried potatoes.",
+                        calories: "900 kcal",
+                        macronutrients: "Carbs: 80g, Protein: 40g, Fat: 45g",
+                        benefits: "High in protein and calories, perfect for weight gain."
+                    }
+                ],
+                vegan: [
+                    {
+                        meal: "Nut Butter Energy Balls",
+                        img: "https://cdn.pixabay.com/photo/2019/02/03/20/43/energy-ball-3973460_640.jpg",
+                        description: "Easy-to-make energy balls packed with healthy fats.",
+                        calories: "250 kcal (per ball)",
+                        macronutrients: "Carbs: 20g, Protein: 8g, Fat: 15g",
+                        benefits: "Great snack for extra calories and energy."
+                    },
+                    {
+                        meal: "Chickpea and Avocado Toast",
+                        img: "https://cdn.pixabay.com/photo/2022/02/12/21/22/toast-7009956_640.jpg",
+                        description: "Toast topped with smashed chickpeas and avocado.",
+                        calories: "400 kcal",
+                        macronutrients: "Carbs: 40g, Protein: 15g, Fat: 25g",
+                        benefits: "High in healthy fats and protein for weight gain."
+                    },
+                    {
+                        meal: "Quinoa and Black Bean Bowl",
+                        img: "https://toriavey.com/images/2012/05/Quinoa-Bowls-IMAGE-1.jpg",
+                        description: "A nutrient-rich bowl filled with quinoa and black beans.",
+                        calories: "600 kcal",
+                        macronutrients: "Carbs: 90g, Protein: 25g, Fat: 10g",
+                        benefits: "High in protein and fiber, ideal for weight gain."
+                    }
+                ]
+            },
+            buildMuscle: {
+                vegetarian: [
+                    {
+                        meal: "Greek Yogurt with Nuts",
+                        img: "https://cdn.pixabay.com/photo/2016/11/21/15/53/berries-1846085_640.jpg",
+                        description: "High-protein yogurt topped with nuts for healthy fats.",
+                        calories: "300 kcal",
+                        macronutrients: "Carbs: 25g, Protein: 20g, Fat: 15g",
+                        benefits: "Perfect post-workout snack to promote muscle recovery."
+                    },
+                    {
+                        meal: "Lentil and Sweet Potato Stew",
+                        img: "https://static01.nyt.com/images/2013/02/26/science/25recipehealth/25recipehealth-superJumbo.jpg",
+                        description: "Hearty stew packed with protein and complex carbs.",
+                        calories: "450 kcal",
+                        macronutrients: "Carbs: 60g, Protein: 25g, Fat: 10g",
+                        benefits: "Provides energy and supports muscle growth."
+                    },
+                    {
+                        meal: "Oatmeal with Protein Powder",
+                        img: "https://cdn.pixabay.com/photo/2015/01/30/17/16/muesli-617686_640.jpg",
+                        description: "Nutritious oatmeal mixed with protein powder for muscle building.",
+                        calories: "400 kcal",
+                        macronutrients: "Carbs: 60g, Protein: 30g, Fat: 8g",
+                        benefits: "Great source of sustained energy for workouts."
+                    }
+                ],
+                nonVegetarian: [
+                    {
+                        meal: "Grilled Salmon",
+                        img: "https://cdn.pixabay.com/photo/2022/01/11/10/05/salmon-6930255_1280.jpg",
+                        description: "Rich in omega-3s and high in protein for muscle growth.",
+                        calories: "400 kcal",
+                        macronutrients: "Carbs: 0g, Protein: 40g, Fat: 25g",
+                        benefits: "Helps in muscle repair and growth post-exercise."
+                    },
+                    {
+                        meal: "Turkey and Quinoa Bowl",
+                        img: "https://cdn.pixabay.com/photo/2020/07/12/09/15/quinoa-5396618_640.jpg",
+                        description: "A delicious bowl filled with lean turkey and quinoa.",
+                        calories: "500 kcal",
+                        macronutrients: "Carbs: 50g, Protein: 35g, Fat: 15g",
+                        benefits: "Packed with protein and complex carbs for muscle building."
+                    },
+                    {
+                        meal: "Egg Omelette with Spinach",
+                        img: "https://cdn.pixabay.com/photo/2023/09/21/12/06/breakfast-8266548_640.jpg",
+                        description: "Protein-rich omelette filled with spinach and cheese.",
+                        calories: "350 kcal",
+                        macronutrients: "Carbs: 5g, Protein: 30g, Fat: 25g",
+                        benefits: "High in protein, perfect for muscle recovery."
+                    }
+                ],
+                vegan: [
+                    {
+                        meal: "Chickpea Salad with Avocado",
+                        img: "https://natashaskitchen.com/wp-content/uploads/2019/02/Avocado-Chickpea-Salad-4.jpg",
+                        description: "A protein-packed salad with chickpeas, avocado, and veggies.",
+                        calories: "450 kcal",
+                        macronutrients: "Carbs: 40g, Protein: 20g, Fat: 25g",
+                        benefits: "Supports muscle recovery and provides healthy fats."
+                    },
+                    {
+                        meal: "Tofu Stir-fry with Broccoli",
+                        img: "https://www.wellplated.com/wp-content/uploads/2022/03/Tofu-Broccoli-Stir-Fry-Recipe.jpg",
+                        description: "Stir-fried tofu with broccoli for a protein boost.",
+                        calories: "400 kcal",
+                        macronutrients: "Carbs: 30g, Protein: 30g, Fat: 15g",
+                        benefits: "High in protein and low in calories, great for muscle building."
+                    },
+                    {
+                        meal: "Vegan Protein Smoothie",
+                        img: "https://beamingbaker.com/wp-content/uploads/2020/01/IGT1-4-Ingredient-Chocolate-Vegan-Protein-Shake-Recipe-1.jpg",
+                        description: "Smoothie packed with plant-based protein and fruits.",
+                        calories: "300 kcal",
+                        macronutrients: "Carbs: 50g, Protein: 20g, Fat: 5g",
+                        benefits: "Great for post-workout recovery."
+                    }
+                ]
+            }
+        };
+
+        document.getElementById("button").addEventListener("click", function () {
+            const goal = document.getElementById("goal").value;
+            const diet = document.getElementById("diet").value;
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = ""; // Clear previous results
+
+            if (goal && diet) {
+                const meals = recommendations[goal][diet];
+                const mealsList = meals.map(meal => `
+                    <li>
+                        <img src="${meal.img}" alt="${meal.meal}">
+                        <h2>${meal.meal}</h2>
+                        <p class="meal-description">${meal.description}</p>
+                        <p>Calories: <strong>${meal.calories}</strong></p>
+                        <p>Macronutrients: <strong>${meal.macronutrients}</strong></p>
+                        <p>Benefits: <strong>${meal.benefits}</strong></p>
+                    </li>
+                `).join("");
+
+                resultDiv.innerHTML = `<ul>${mealsList}</ul>`;
+            } else {
+                resultDiv.innerHTML = "<p>Please select a goal and a diet type.</p>";
+            }
+        });
+    </script>
+</body>
+</html>

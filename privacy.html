@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs and Privacy Policy</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Quicksand:wght@400;600&display=swap");
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Quicksand", sans-serif;
+            background: #c1c1d3;
+            color: #fff;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            border: 5px solid white; /* Add white boundary around the entire page */
+        }
+
+        .faq-section {
+            background: black;
+            width: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2em;
+            overflow: hidden;
+            border-right: 5px solid white; /* Add white boundary between sections */
+        }
+
+        .privacy-section {
+            background: #f0f0f0;
+            color: #333;
+            font-family: 'Poppins', sans-serif;
+            width: 50%;
+            margin-left: 50%;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .title {
+            font-size: 3rem;
+            margin: 2rem 0;
+        }
+
+        .faq {
+            max-width: 700px;
+            margin-top: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #fff;
+            cursor: pointer;
+        }
+
+        .question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .question h3 {
+            font-size: 1.8rem;
+        }
+
+        .answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 1.4s ease;
+        }
+
+        .answer p {
+            padding-top: 1rem;
+            line-height: 1.6;
+            font-size: 1.4rem;
+        }
+
+        .faq.active .answer {
+            max-height: 300px;
+            animation: fade 1s ease-in-out;
+        }
+
+        .faq.active svg {
+            transform: rotate(180deg);
+        }
+
+        svg {
+            transition: transform 0.5s ease-in;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+
+        header {
+            background-color: black;
+            color: white;
+            padding: 1.5em 0;
+            text-align: center;
+            box-shadow: 0px 4px 6px white;
+            border-bottom: 5px solid white;
+        }
+
+        h1,
+        h2 {
+            margin-top: 0;
+            font-weight: 700;
+        }
+
+        main {
+            padding: 2em;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: gray;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            margin-bottom: 2em;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- FAQ Section - Fixed -->
+    <section class="faq-section">
+        <h1 class="title">FAQs</h1>
+        <div class="faq-container">
+            <div class="faq">
+                <div class="question">
+                    <h3>What types of exercises are best for beginners?</h3>
+                    <svg width="15" height="10" viewBox="0 0 42 25">
+                        <path d="M33L21 21L39 3" stroke="white" stroke-width="7" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="answer">
+                    <p>Beginners should start with low-impact exercises like walking, cycling, or bodyweight exercises to build endurance and strength gradually.</p>
+                </div>
+            </div>
+            <div class="faq">
+                <div class="question">
+                    <h3>How can I improve my mental health through physical activity?</h3>
+                    <svg width="15" height="10" viewBox="0 0 42 25">
+                        <path d="M3 3L21 21L39 3" stroke="white" stroke-width="7" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="answer">
+                    <p>Regular exercise releases endorphins, which can reduce stress, anxiety, and depression while improving mood and self-esteem.</p>
+                </div>
+            </div>
+            <div class="faq">
+                <div class="question">
+                    <h3>What are some healthy meal options for weight loss?</h3>
+                    <svg width="15" height="10" viewBox="0 0 42 25">
+                        <path d="M3 3L21 21L39 3" stroke="white" stroke-width="7" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="answer">
+                    <p>Focus on lean proteins, whole grains, vegetables, and healthy fats. Examples include grilled chicken with quinoa, salads with nuts, and veggie stir-fries.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Policy Section - Scrollable -->
+    <section class="privacy-section">
+        <header>
+            <h1>Active Jeevan - Privacy Policy</h1>
+        </header>
+        <main>
+            <section>
+                <h2>Introduction</h2>
+                <p>Welcome to Active Jeevan! We respect your privacy and are committed to protecting your personal data.
+                    This policy outlines how we collect, use, and protect your information while using our website and
+                    services.</p>
+            </section>
+            <section>
+                <h2>What Data We Collect</h2>
+                <p>We collect the following information:</p>
+                <ul>
+                    <li>Name</li>
+                    <li>Email Address</li>
+                    <li>Phone Number</li>
+                    <li>Other personal data that you choose to provide</li>
+                </ul>
+            </section>
+            <section>
+                <h2>How We Use Your Data</h2>
+                <p>We use the collected data to:</p>
+                <ul>
+                    <li>Provide our services and respond to your inquiries</li>
+                    <li>Improve our website and services</li>
+                    <li>Send newsletters and promotional emails</li>
+                    <li>Comply with laws and regulations</li>
+                </ul>
+            </section>
+            <section>
+                <h2>How We Protect Your Data</h2>
+                <p>We take the protection of your data seriously and have implemented various measures to ensure its
+                    security, including:</p>
+                <ul>
+                    <li>Encryption of sensitive data</li>
+                    <li>Secure servers and data storage</li>
+                    <li>Access controls and authentication</li>
+                    <li>Regular security monitoring and updates</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Your Rights</h2>
+                <p>You have the right to:</p>
+                <ul>
+                    <li>Access your data</li>
+                    <li>Correct your data</li>
+                    <li>Delete your data</li>
+                    <li>Object to data processing</li>
+                    <li>Withdraw your consent</li>
+                </ul>
+            </section>
+        </main>
+    </section>
+
+    <script>
+        document.querySelectorAll('.faq').forEach(function (faq) {
+            faq.addEventListener('click', function () {
+                this.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
